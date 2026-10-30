@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>测未来3个月，你的感情会迎来什么好事</title>
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{max-width:700px;margin:30px auto;padding:20px;background:#fff8fa;color:#333}
+.que{margin:24px 0}
+.que p{font-weight:600}
+.opt{margin:8px 0}
+button{background:#f4a8b8;color:white;border:none;padding:12px 24px;border-radius:9px;font-size:16px;cursor:pointer}
+#result{margin-top:30px;padding:20px;border-radius:12px;background:#fef0f4;display:none}
+</style>
+</head>
+<body>
+<h2>✨测未来3个月，你的感情会迎来什么好事✨</h2>
+<p>凭第一直觉选择，A=1分 B=2分 C=3分 D=4分</p >
+
+<div class="que">
+<p>1. 周末有空，你更愿意？</p >
+<div class="opt"><label><input type="radio" name="q1" value="1"> A 自己独处，安静放空</label></div>
+<div class="opt"><label><input type="radio" name="q1" value="2"> B 和好友出门聊天散心</label></div>
+<div class="opt"><label><input type="radio" name="q1" value="3"> C 随缘，有人约就出去</label></div>
+<div class="opt"><label><input type="radio" name="q1" value="4"> D 主动去找有好感的人</label></div>
+</div>
+
+<div class="que">
+<p>2. 面对感情里的小矛盾，你习惯？</p >
+<div class="opt"><label><input type="radio" name="q2" value="1"> A 先冷静，不急于沟通</label></div>
+<div class="opt"><label><input type="radio" name="q2" value="2"> B 直接说出心里感受</label></div>
+<div class="opt"><label><input type="radio" name="q2" value="3"> C 容易内耗反复琢磨</label></div>
+<div class="opt"><label><input type="radio" name="q2" value="4"> D 尽量迁就避免冲突</label></div>
+</div>
+
+<div class="que">
+<p>3. 关于感情，你现在更期待？</p >
+<div class="opt"><label><input type="radio" name="q3" value="1"> A 先好好爱自己，不急找人</label></div>
+<div class="opt"><label><input type="radio" name="q3" value="2"> B 遇见懂你的新人</label></div>
+<div class="opt"><label><input type="radio" name="q3" value="3"> C 现有关系变得安稳舒服</label></div>
+<div class="opt"><label><input type="radio" name="q3" value="4"> D 放下过去的心结</label></div>
+</div>
+
+<div class="que">
+<p>4. 看到别人甜蜜，你的内心？</p >
+<div class="opt"><label><input type="radio" name="q4" value="1"> A 无感，每个人节奏不同</label></div>
+<div class="opt"><label><input type="radio" name="q4" value="2"> B 有点羡慕，期待缘分</label></div>
+<div class="opt"><label><input type="radio" name="q4" value="3"> C 会对比，担心遇不到对的人</label></div>
+<div class="opt"><label><input type="radio" name="q4" value="4"> D 觉得爱情大多很麻烦</label></div>
+</div>
+
+<div class="que">
+<p>5. 如果有人向你释放好感，你会？</p >
+<div class="opt"><label><input type="radio" name="q5" value="1"> A 保持距离，慢慢观察</label></div>
+<div class="opt"><label><input type="radio" name="q5" value="2"> B 愿意尝试接触看看</label></div>
+<div class="opt"><label><input type="radio" name="q5" value="3"> C 胡思乱想，不敢相信</label></div>
+<div class="opt"><label><input type="radio" name="q5" value="4"> D 直接回避，不想谈恋爱</label></div>
+</div>
+
+<div class="que">
+<p>6. 过去感情留下的遗憾，你现在？</p >
+<div class="opt"><label><input type="radio" name="q6" value="1"> A 基本放下，不牵动情绪</label></div>
+<div class="opt"><label><input type="radio" name="q6" value="2"> B 偶尔想起，不影响生活</label></div>
+<div class="opt"><label><input type="radio" name="q6" value="3"> C 经常回想，很难释怀</label></div>
+<div class="opt"><label><input type="radio" name="q6" value="4"> D 耿耿于怀，害怕受伤</label></div>
+</div>
+
+<div class="que">
+<p>7. 一段舒服的感情最重要是？</p >
+<div class="opt"><label><input type="radio" name="q7" value="1"> A 彼此独立，互相尊重</label></div>
+<div class="opt"><label><input type="radio" name="q7" value="2"> B 无话不谈，共情彼此</label></div>
+<div class="opt"><label><input type="radio" name="q7" value="3"> C 长久安稳，不离不弃</label></div>
+<div class="opt"><label><input type="radio" name="q7" value="4"> D 轻松自在没有压力</label></div>
+</div>
+
+<div class="que">
+<p>8. 接下来三个月，你内心更倾向？</p >
+<div class="opt"><label><input type="radio" name="q8" value="1"> A 专注自身，感情随缘</label></div>
+<div class="opt"><label><input type="radio" name="q8" value="2"> B 主动向外，拓展圈子</label></div>
+<div class="opt"><label><input type="radio" name="q8" value="3"> C 静待缘分，等人靠近</label></div>
+<div class="opt"><label><input type="radio" name="q8" value="4"> D 暂时封闭，不想碰感情</label></div>
+</div>
+
+<button onclick="calc()">查看测试结果</button>
+<div id="result"></div>
+
+<script>
+function calc(){
+let s=0;
+s+=Number(document.querySelector('input[name=q1]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q2]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q3]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q4]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q5]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q6]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q7]:checked')?.value||0)
+s+=Number(document.querySelector('input[name=q8]:checked')?.value||0)
+let text=''
+if(s>=8&&s<=14){
+text=`<h3>【自爱沉淀】</h3><p>不会突然爆发轰轰烈烈的桃花。最大收获是稳住自己的情绪，学会建立边界，远离消耗你的烂桃花。缘分只是生活附赠的礼物，你本身的生活就足够精彩。<br/>💫关键词：自爱｜边界｜沉淀</p >`
+}else if(s>=15&&s<=20){
+text=`<h3>【新缘将至】</h3><p>容易遇到同频合拍的人，聊天不费力，相处轻松无压迫。单身：日常出行、社交会邂逅好感对象，慢慢靠近。有伴：误会消散，更懂得换位思考，争吵变少。<br/>💫关键词：相遇｜默契｜松弛</p >`
+}else if(s>=21&&s<=26){
+text=`<h3>【心结和解】</h3><p>过去感情留下的委屈与遗憾会慢慢释怀。单身：可能重逢旧人，是和解不是强行复合，放下包袱轻装上阵。有伴：跨过内耗阶段，关系慢慢趋于稳定。<br/>💫关键词：释怀｜和解｜安稳</p >`
+}else if(s>=27&&s<=32){
+text=`<h3>【温柔偏爱】</h3><p>你愿意卸下防备，敢于接纳亲密关系里的甜。单身：会迎来一段节奏温和的恋爱，对方耐心对待你。有伴：甜度上涨，感受到被坚定偏爱。<br/>⚠️小提示：敞开心扉的同时，守住自己底线，别一味迁就。<br/>💫关键词：敞开｜柔软｜偏爱</p >`
+}else{text="请把所有题目全部选完！"}
+document.getElementById("result").innerHTML=text+"<br/><br/><p style='font-size:13px'>免责声明：本测试仅趣味娱乐，非专业心理评估，不作人生决策依据</p >";
+document.getElementById("result").style.display="block";
+}
+</script>
+</body>
+</html>
