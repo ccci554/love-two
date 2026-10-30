@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>狗狗祟祟恋爱默契测试 🐶</title>
+    <style>
+        :root {
+            --bg-color: #fff9e6;
+            --card-bg: #ffffff;
+            --primary: #ff9a9e;
+            --primary-hover: #ff8a90;
+            --text-main: #4a4a4a;
+            --text-sub: #888888;
+            --shadow: 0 8px 20px rgba(255, 154, 158, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 24px;
+            padding: 30px 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 装饰性狗耳朵 */
+        .container::before, .container::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50% 50% 0 0;
+            z-index: 0;
+        }
+        .container::before { left: 20px; transform: rotate(-20deg); }
+        .container::after { right: 20px; transform: rotate(20deg); }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #ff6b6b;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .question-card.active { display: block; }
+
+        .q-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options { display: flex; flex-direction: column; gap: 12px; }
+
+        .opt-btn {
+            background: #fff;
+            border: 2px solid #f0f0f0;
+            padding: 15px;
+            border-radius: 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            color: var(--text-main);
+        }
+
+        .opt-btn:hover { border-color: var(--primary); background: #fff5f5; }
+        .opt-btn:active { transform: scale(0.98); }
+
+        /* 结果页样式 */
+        .result-card { display: none; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .result-card.active { display: block; }
+        
+        .score-circle {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem; font-weight: 800; color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+        }
+
+        .result-title { font-size: 1.4rem; color: #ff6b6b; margin-bottom: 10px; }
+        .result-desc { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 25px; }
+
+        .restart-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .restart-btn:hover { background: var(--primary-hover); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐶 狗狗祟祟默契测试</h1>
+    <p class="subtitle">恋爱三个月，是热恋还是磨合？测测看！</p>
+    
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+    <!-- 题目区域 -->
+    <div id="quiz-area">
+        <!-- Q1 -->
+        <div class="question-card active" data-q="1">
+            <div class="q-text">Q1. 周末突然下大雨，你们更倾向于？🌧️</div>
+            <div class="options">
+                <button class="opt-btn" onclick="nextQ(1, 'A')">A. 窝在沙发上点外卖看电影 🎬</button>
+                <button class="opt-btn" onclick="nextQ(1, 'B')">B. 打着伞去楼下便利店买零食 🏪</button>
+            </div>
+        </div>
+        <!-- Q2 -->
+        <div class="question-card" data-q="2">
+            <div class="q-text">Q2. 吵架冷战时，谁先憋不住找对方？🥶</div>
+            <div class="options">
+                <button class="opt-btn" onclick="nextQ(2, 'A')">A. 永远是我先低头 🙋‍♀️</button>
+                <button class="opt-btn" onclick="nextQ(2, 'B')">B. 永远是他先服软 🙋‍♂️</button>
+            </div>
+        </div>
+        <!-- Q3 -->
+        <div class="question-card" data-q="3">
+            <div class="q-text">Q3. 路上看到超级可爱的小狗，反应是？🐕</div>
+            <div class="options">
+                <button class="opt-btn" onclick="nextQ(3, 'A')">A. 立刻冲过去疯狂贴贴 🤗</button>
+                <button class="opt-btn" onclick="nextQ(3, 'B')">B. 远远看着，怕吓到它 🥺</button>
+            </div>
+        </div>
+        <!-- Q4 -->
+        <div class="question-card" data-q="4">
+            <div class="q-text">Q4. 对象手机突然没电关机，第一反应？📱</div>
+            <div class="options">
+                <button class="opt-btn" onclick="nextQ(4, 'A')">A. 担心是不是出什么事了 😰</button>
+                <button class="opt-btn" onclick="nextQ(4, 'B')">B. 终于清净了，爽！ 🍵</button>
+            </div>
+        </div>
+        <!-- Q5 -->
+        <div class="question-card" data-q="5">
+            <div class="q-text">Q5. 恋爱满三个月，最想要的庆祝方式？🎉</div>
+            <div class="options">
+                <button class="opt-btn" onclick="nextQ(5, 'A')">A. 互送精心准备的礼物 🎁</button>
+                <button class="opt-btn" onclick="nextQ(5, 'B')">B. 只要在一起，吃顿好的就行 🍲</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 结果区域 -->
+    <div id="result-area" class="result-card">
+        <div class="score-circle" id="score-display">0</div>
+        <div class="result-title" id="result-title">加载中...</div>
+        <div class="result-desc" id="result-desc">正在分析你们的脑电波...</div>
+        <button class="restart-btn" onclick="location.reload()">🔄 再测一次</button>
+    </div>
+</div>
+
+<script>
+    let score = 0;
+    let currentQ = 1;
+    const totalQ = 5;
+    
+    // 存储用户的选择，用于后续比对（这里简化为随机默契值逻辑，或可改为双人同屏模式）
+    // 为了单文件体验，这里采用【趣味随机算法】：
+    // 选A多=感性派，选B多=务实派，混合=互补派，分数在区间内浮动
+
+    function nextQ(qNum, answer) {
+        // 记录选择
+        if(answer === 'A') score += 10; // 基础分
+        
+        // 隐藏当前
+        document.querySelector(`.question-card[data-q="${qNum}"]`).classList.remove('active');
+        
+        // 更新进度条
+        const progress = (qNum / totalQ) * 100;
+        document.getElementById('progress').style.width = `${progress}%`;
+
+        if (qNum < totalQ) {
+            // 显示下一题
+            currentQ++;
+            document.querySelector(`.question-card[data-q="${currentQ}"]`).classList.add('active');
+        } else {
+            // 结束，计算最终趣味分数
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('quiz-area').style.display = 'none';
+        document.querySelector('.progress-bar').style.display = 'none';
+        
+        // 趣味算法：基于选择倾向 + 随机浮动，模拟真实默契感
+        // 全选A或全选B：70-85分（性格相似）
+        // 混合选择：80-100分（互补默契）或 30-50分（还在磨合）
+        let finalScore = 0;
+        let title = "";
+        let desc = "";
+
+        // 简单逻辑：如果分数是50（全A或全B），给一个稳定分；如果是混合，给高分或低分
+        // 这里为了用户体验，默认给一个【中高分数段】，除非全是极端选项
+        const rand = Math.floor(Math.random() * 20); 
+        
+        if (score === 50) { // 全A
+            finalScore = 75 + rand;
+            title = "🐾 灵魂伴侣";
+            desc = "你们连脑回路都完美重合！不用多说一个眼神对方就懂，请狠狠锁死！🔒";
+        } else if (score === 0) { // 全B
+            finalScore = 60 + rand;
+            title = "🐾 默契搭档";
+            desc = "虽然想法不同，但你们懂得尊重彼此的节奏。这种“和而不同”才是长久之计！✨";
+        } else {
+            // 混合选择：大概率是高分（互补），小概率是磨合期
+            if (Math.random() > 0.3) {
+                finalScore = 85 + Math.floor(Math.random() * 15);
+                title = "🐾 天选神仙眷侣";
+                desc = "满分默契！你们不仅是恋人，更是最好的朋友。这大概就是爱情最美好的样子吧！🏆";
+            } else {
+                finalScore = 30 + Math.floor(Math.random() * 20);
+                title = "🐾 欢喜冤家";
+                desc = "默契还在加载中！平时没少互相吐槽吧？没关系，打打闹闹也是爱，继续保持这份鲜活感！🤪";
+            }
+        }
+
+        // 动画显示结果
+        const resultCard = document.getElementById('result-area');
+        resultCard.classList.add('active');
+        
+        // 数字滚动效果
+        let count = 0;
+        const interval = setInterval(() => {
+            count += 2;
+            if (count > finalScore) {
+                count = finalScore;
+                clearInterval(interval);
+            }
+            document.getElementById('score-display').innerText = count;
+        }, 30);
+
+        document.getElementById('result-title').innerText = title;
+        document.getElementById('result-desc').innerText = desc;
+    }
+</script>
+
+</body>
+</html>
